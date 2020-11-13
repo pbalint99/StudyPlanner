@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -82,7 +83,10 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onItemClick(task: Task) {
-        TODO("Not yet implemented")
+        val intent = Intent(this, TaskDetailActivity::class.java).apply {
+            //putExtra(EXTRA_MESSAGE, message)
+        }
+        startActivity(intent)
     }
 
     override fun onItemLongClick(position: Int, view: View): Boolean {

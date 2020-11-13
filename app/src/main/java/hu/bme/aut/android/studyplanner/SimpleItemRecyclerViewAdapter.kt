@@ -62,16 +62,17 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
             val titleView: TextView = view.findViewById(R.id.listTitle)
             var task: Task? = null
 
-//            init {
-//                itemView.setOnClickListener {
-//                    todo?.let { todo -> itemClickListener?.onItemClick(todo) }
-//                }
-//
-//                itemView.setOnLongClickListener { view ->
-//                    todo?.let {todo -> itemClickListener?.onItemLongClick(adapterPosition, view, todo) }
-//                    true
-//                }
-//            }
+            init {
+                itemView.setOnClickListener {
+                    task?.let { task -> itemClickListener?.onItemClick(task) }
+                }
+
+                itemView.setOnLongClickListener { view ->
+                    //TODO Kiszedtem egy taskot a végéről
+                    task?.let {task -> itemClickListener?.onItemLongClick(adapterPosition, view) }
+                    true
+                }
+            }
         }
 
 //        fun addItem(task: Task) {
