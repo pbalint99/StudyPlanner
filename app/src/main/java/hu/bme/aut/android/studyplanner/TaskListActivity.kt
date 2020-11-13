@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
+import kotlinx.android.synthetic.main.task_list.*
 
 /**
  * An activity representing a list of Pings. This activity
@@ -26,7 +27,7 @@ import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class TaskListActivity : AppCompatActivity() {
+class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener{
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -35,6 +36,7 @@ class TaskListActivity : AppCompatActivity() {
     private var twoPane: Boolean = false
 
     private lateinit var taskViewModel: TaskViewModel
+    private lateinit var simpleItemRecyclerViewAdapter: SimpleItemRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,65 +66,26 @@ class TaskListActivity : AppCompatActivity() {
         })
     }
 
+    override fun onTaskCreated(task: Task) {
+        taskViewModel.insert(task)
+    }
+
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        val demo = mutableListOf<Task>()
-        demo.add(0,Task("UWU"))
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, demo, twoPane)
+//        val demo = mutableListOf<Task>()
+//        demo.add(0,Task("UWU"))
+//        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, demo, twoPane)
+        simpleItemRecyclerViewAdapter = SimpleItemRecyclerViewAdapter(this,)
+        simpleItemRecyclerViewAdapter.itemClickListener = this
+        task_list.adapter = simpleItemRecyclerViewAdapter
     }
 
-    class SimpleItemRecyclerViewAdapter(
-        private val parentActivity: TaskListActivity,
-        private val values: List<Task>,
-        private val twoPane: Boolean
-    ) :
-        RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
-
-        private val onClickListener: View.OnClickListener
-
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Task
-                if (twoPane) {
-                    val fragment = TaskDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(TaskDetailFragment.ARG_ITEM_ID, item.title)
-                        }
-                    }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.task_detail_container, fragment)
-                        .commit()
-                } else {
-                    val intent = Intent(v.context, TaskDetailActivity::class.java).apply {
-                        putExtra(TaskDetailFragment.ARG_ITEM_ID, item.title)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.task_list_content, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.title
-            holder.contentView.text = item.title
-
-            with(holder.itemView) {
-                tag = item
-                setOnClickListener(onClickListener)
-            }
-        }
-
-        override fun getItemCount() = values.size
-
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.findViewById(R.id.id_text)
-            val contentView: TextView = view.findViewById(R.id.content)
-        }
+    override fun onItemClick(task: Task) {
+        TODO("Not yet implemented")
     }
+
+    override fun onItemLongClick(position: Int, view: View): Boolean {
+        TODO("Not yet implemented")
+    }
+
+
 }
