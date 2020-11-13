@@ -16,31 +16,31 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         //private val values: List<Task>
         private val twoPane: Boolean = false
 
-        private val onClickListener: View.OnClickListener
+        //private val onClickListener: View.OnClickListener
         var itemClickListener: TaskItemClickListener? = null
         private val taskList = mutableListOf<Task>()
 
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Task
-                if (twoPane) {
-                    val fragment = TaskDetailFragment().apply {
-                        arguments = Bundle().apply {
-                            putString(TaskDetailFragment.ARG_ITEM_ID, item.title)
-                        }
-                    }
-//                    parentActivity.supportFragmentManager
-//                        .beginTransaction()
-//                        .replace(R.id.task_detail_container, fragment)
-//                        .commit()
-                } else {
-                    val intent = Intent(v.context, TaskDetailActivity::class.java).apply {
-                        putExtra(TaskDetailFragment.ARG_ITEM_ID, item.title)
-                    }
-                    v.context.startActivity(intent)
-                }
-            }
-        }
+//        init {
+//            onClickListener = View.OnClickListener { v ->
+//                val item = v.tag as Task
+//                if (twoPane) {
+//                    val fragment = TaskDetailFragment().apply {
+//                        arguments = Bundle().apply {
+//                            putString(TaskDetailFragment.ARG_ITEM_ID, item.title)
+//                        }
+//                    }
+////                    parentActivity.supportFragmentManager
+////                        .beginTransaction()
+////                        .replace(R.id.task_detail_container, fragment)
+////                        .commit()
+//                } else {
+//                    val intent = Intent(v.context, TaskDetailActivity::class.java).apply {
+//                        putExtra(TaskDetailFragment.ARG_ITEM_ID, item.title)
+//                    }
+//                    v.context.startActivity(intent)
+//                }
+//            }
+//        }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
@@ -49,30 +49,41 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = taskList[position]
-            holder.titleView.text = item.title
+            val task = taskList[position]
 
-            with(holder.itemView) {
-                tag = item
-                setOnClickListener(onClickListener)
-            }
+            holder.task = task
+
+            holder.titleView.text = task.title
         }
 
         override fun getItemCount() = taskList.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val titleView: TextView = view.findViewById(R.id.listTitle)
-        }
-        fun addItem(task: Task) {
-            val size = taskList.size
-            taskList.add(task)
-            notifyItemInserted(size)
+            var task: Task? = null
+
+//            init {
+//                itemView.setOnClickListener {
+//                    todo?.let { todo -> itemClickListener?.onItemClick(todo) }
+//                }
+//
+//                itemView.setOnLongClickListener { view ->
+//                    todo?.let {todo -> itemClickListener?.onItemLongClick(adapterPosition, view, todo) }
+//                    true
+//                }
+//            }
         }
 
+//        fun addItem(task: Task) {
+//            val size = taskList.size
+//            taskList.add(task)
+//            notifyItemInserted(size)
+//        }
+
         fun addAll(tasks: List<Task>) {
-            val size = taskList.size
-            taskList += tasks
-            notifyItemRangeInserted(size, tasks.size)
+            taskList.clear()
+            taskList.addAll(tasks)
+            notifyDataSetChanged()
         }
 
         fun deleteRow(position: Int) {

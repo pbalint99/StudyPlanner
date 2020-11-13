@@ -69,7 +69,7 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onTaskCreated(task: Task) {
-        simpleItemRecyclerViewAdapter.addItem(task)
+        taskViewModel.insert(task)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
