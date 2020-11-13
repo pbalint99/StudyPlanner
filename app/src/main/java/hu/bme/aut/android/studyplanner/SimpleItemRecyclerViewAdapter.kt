@@ -12,7 +12,7 @@ import hu.bme.aut.android.studyplanner.model.Task
 class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         //TODO
-        private val parentActivity: TaskListActivity
+        //private val parentActivity: TaskListActivity
         //private val values: List<Task>
         private val twoPane: Boolean = false
 
@@ -29,10 +29,10 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
                             putString(TaskDetailFragment.ARG_ITEM_ID, item.title)
                         }
                     }
-                    parentActivity.supportFragmentManager
-                        .beginTransaction()
-                        .replace(R.id.task_detail_container, fragment)
-                        .commit()
+//                    parentActivity.supportFragmentManager
+//                        .beginTransaction()
+//                        .replace(R.id.task_detail_container, fragment)
+//                        .commit()
                 } else {
                     val intent = Intent(v.context, TaskDetailActivity::class.java).apply {
                         putExtra(TaskDetailFragment.ARG_ITEM_ID, item.title)
@@ -49,9 +49,8 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            val item = values[position]
-            holder.idView.text = item.title
-            holder.contentView.text = item.title
+            val item = taskList[position]
+            holder.titleView.text = item.title
 
             with(holder.itemView) {
                 tag = item
@@ -59,11 +58,10 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
             }
         }
 
-        override fun getItemCount() = values.size
+        override fun getItemCount() = taskList.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val idView: TextView = view.findViewById(R.id.id_text)
-            val contentView: TextView = view.findViewById(R.id.content)
+            val titleView: TextView = view.findViewById(R.id.listTitle)
         }
         fun addItem(task: Task) {
             val size = taskList.size

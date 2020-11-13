@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.task_list.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener{
+class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -47,7 +47,8 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         toolbar.title = title
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-
+            val taskCreateFragment = TaskCreateFragment()
+            taskCreateFragment.show(supportFragmentManager, "TAG")
         }
 
         if (findViewById<NestedScrollView>(R.id.task_detail_container) != null) {
@@ -67,14 +68,14 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onTaskCreated(task: Task) {
-        taskViewModel.insert(task)
+        simpleItemRecyclerViewAdapter.addItem(task)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 //        val demo = mutableListOf<Task>()
 //        demo.add(0,Task("UWU"))
 //        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, demo, twoPane)
-        simpleItemRecyclerViewAdapter = SimpleItemRecyclerViewAdapter(this,)
+        simpleItemRecyclerViewAdapter = SimpleItemRecyclerViewAdapter()
         simpleItemRecyclerViewAdapter.itemClickListener = this
         task_list.adapter = simpleItemRecyclerViewAdapter
     }
