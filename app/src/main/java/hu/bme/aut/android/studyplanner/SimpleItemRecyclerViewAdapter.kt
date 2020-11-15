@@ -54,12 +54,18 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
             holder.task = task
 
             holder.titleView.text = task.title
+            holder.weekView.text = task.week.toString()
+            holder.typeView.text = task.type
+            holder.subjectView.text = task.subject
         }
 
         override fun getItemCount() = taskList.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val titleView: TextView = view.findViewById(R.id.listTitle)
+            val weekView: TextView = view.findViewById(R.id.listWeek)
+            val typeView: TextView = view.findViewById(R.id.listType)
+            val subjectView: TextView = view.findViewById(R.id.listSubject)
             var task: Task? = null
 
             init {

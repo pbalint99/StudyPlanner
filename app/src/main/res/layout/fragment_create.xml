@@ -3,13 +3,28 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:stretchColumns="1">
-<EditText
-    android:id="@+id/etTitle"
-    android:width="200dp" />
+
+    <EditText
+        android:id="@+id/etTitle"
+        android:width="200dp"
+        android:hint="Name" />
+    <EditText
+        android:id="@+id/etSubject"
+        android:width="200dp"
+        android:hint="Subject" />
+    <EditText
+        android:id="@+id/etType"
+        android:width="200dp"
+        android:hint="Type" />
+    <NumberPicker
+        android:id="@+id/npWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <Button
         android:id="@+id/btnCreate"
-        android:layout_width="wrap_content">
-    </Button>
+        android:layout_width="wrap_content"
+        android:text="@string/createBtn"></Button>
 
 
 </TableLayout>

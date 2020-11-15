@@ -24,13 +24,20 @@ class Repository(private val taskDao: TaskDao) {
 
     private fun RoomTask.toDomainModel(): Task {
         return Task(
-            title = title
+            id = id,
+            title = title,
+            week = week,
+            type = type,
+            subject = subject,
         )
     }
 
     private fun Task.toRoomModel(): RoomTask {
         return RoomTask(
-            title = title
+            title = title,
+            week = week,
+            type = type,
+            subject = subject,
         )
     }
 }

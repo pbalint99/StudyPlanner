@@ -7,5 +7,8 @@ import androidx.room.PrimaryKey
 data class RoomTask(
     @PrimaryKey(autoGenerate = true)
     val id: Long = 0,
-    val title: String
+    val title: String,
+    val type: String = "",
+    val subject: String = "",
+    val week: Int = 1
 )

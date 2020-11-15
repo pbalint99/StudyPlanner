@@ -36,9 +36,14 @@ class TaskCreateFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        npWeek.setMaxValue(15);
+        npWeek.setMinValue(1);
         btnCreate.setOnClickListener{
             listener.onTaskCreated(Task(
-                title = etTitle.text.toString()
+                title = etTitle.text.toString(),
+                week = npWeek.value,
+                type = etType.text.toString(),
+                subject = etSubject.text.toString()
             ))
 
             dismiss()
