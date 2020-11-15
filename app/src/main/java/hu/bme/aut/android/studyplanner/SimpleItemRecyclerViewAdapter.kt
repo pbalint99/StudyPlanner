@@ -1,10 +1,9 @@
 package hu.bme.aut.android.studyplanner
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.studyplanner.model.Task
@@ -55,8 +54,9 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
 
             holder.titleView.text = task.title
             holder.weekView.text = task.week.toString()
-            holder.typeView.text = task.type
+            holder.typeView.text = getType(task.type)
             holder.subjectView.text = task.subject
+            holder.typeImage.setImageResource(getTypeImage(task.type))
         }
 
         override fun getItemCount() = taskList.size
@@ -65,6 +65,7 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
             val titleView: TextView = view.findViewById(R.id.listTitle)
             val weekView: TextView = view.findViewById(R.id.listWeek)
             val typeView: TextView = view.findViewById(R.id.listType)
+            val typeImage: ImageView = view.findViewById(R.id.iv)
             val subjectView: TextView = view.findViewById(R.id.listSubject)
             var task: Task? = null
 
@@ -96,6 +97,25 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         fun deleteRow(position: Int) {
             taskList.removeAt(position)
             notifyItemRemoved(position)
+        }
+
+        private fun getType(id: Int): String {
+            var type = ""
+            type = when(id) {
+                0 -> "Homework"
+                1 -> "Test"
+                else -> {
+                    id.toString()
+                }
+            }
+            return type
+        }
+        private fun getTypeImage(type: Int): Int {
+            return when (type) {
+                0 -> R.drawable.homework
+                1 -> R.drawable.test
+                else -> R.drawable.close
+            }
         }
 
         interface TaskItemClickListener {

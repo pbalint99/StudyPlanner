@@ -2,10 +2,12 @@ package hu.bme.aut.android.studyplanner
 
 import android.content.Context
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.studyplanner.model.Task
 import kotlinx.android.synthetic.main.fragment_create.*
@@ -36,13 +38,16 @@ class TaskCreateFragment: DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        npWeek.setMaxValue(15);
-        npWeek.setMinValue(1);
+        npWeek.maxValue = 15;
+        npWeek.minValue = 1;
         btnCreate.setOnClickListener{
+            var type: Int = if(radioGroup.checkedRadioButtonId == radioHW.id) 0
+            else 1
+
             listener.onTaskCreated(Task(
                 title = etTitle.text.toString(),
                 week = npWeek.value,
-                type = etType.text.toString(),
+                type = type,
                 subject = etSubject.text.toString()
             ))
 

@@ -12,10 +12,24 @@
         android:id="@+id/etSubject"
         android:width="200dp"
         android:hint="Subject" />
-    <EditText
+    <TextView
         android:id="@+id/etType"
         android:width="200dp"
-        android:hint="Type" />
+        android:text="Type" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RadioButton android:id="@+id/radioHW"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Homework"/>
+        <RadioButton android:id="@+id/radioTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test"/>
+    </RadioGroup>
     <NumberPicker
         android:id="@+id/npWeek"
         android:layout_width="wrap_content"

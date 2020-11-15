@@ -8,8 +8,11 @@ interface TaskDao {
     @Insert
     fun insertTask(task: RoomTask)
 
-    @Query("SELECT * FROM task")
+    @Query("SELECT * FROM task ORDER BY week")
     fun getAllTasks(): LiveData<List<RoomTask>>
+
+    @Query("SELECT * FROM task WHERE id == :id")
+    fun getTaskById(id: Long?): RoomTask?
 
     @Update
     fun updateTask(task: RoomTask): Int
