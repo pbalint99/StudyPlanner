@@ -26,7 +26,8 @@ import kotlinx.android.synthetic.main.task_list.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener {
+class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener,
+TaskEditFragment.TaskEditedListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -70,6 +71,10 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         taskViewModel.insert(task)
     }
 
+    override fun onTaskEdited(task: Task) {
+        TODO("Not yet implemented")
+    }
+
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 //        val demo = mutableListOf<Task>()
 //        demo.add(0,Task("UWU"))
@@ -90,7 +95,9 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onItemLongClick(position: Int, view: View): Boolean {
-        TODO("Not yet implemented")
+        val taskCreateFragment = TaskCreateFragment()
+        taskCreateFragment.show(supportFragmentManager, "TAG")
+        return true
     }
 
 

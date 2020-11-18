@@ -55,7 +55,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
 
             holder.titleView.text = task.title
             holder.weekView.text = task.week.toString()
-            holder.typeView.text = getType(task.type)
             holder.subjectView.text = task.subject
             holder.typeImage.setImageResource(getTypeImage(task.type))
         }
@@ -65,7 +64,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val titleView: TextView = view.findViewById(R.id.listTitle)
             val weekView: TextView = view.findViewById(R.id.listWeek)
-            val typeView: TextView = view.findViewById(R.id.listType)
             val typeImage: ImageView = view.findViewById(R.id.iv)
             val subjectView: TextView = view.findViewById(R.id.listSubject)
             var task: Task? = null
@@ -100,17 +98,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
             notifyItemRemoved(position)
         }
 
-        private fun getType(id: Int): String {
-            var type = ""
-            type = when(id) {
-                0 -> "Homework"
-                1 -> "Test"
-                else -> {
-                    id.toString()
-                }
-            }
-            return type
-        }
         private fun getTypeImage(type: Int): Int {
             return when (type) {
                 0 -> R.drawable.homework

@@ -4,4 +4,5 @@
     <string name="title_task_detail">Task Detail</string>
     <string name="create">Create new task</string>
     <string name="createBtn">Create</string>
+    <string name="edit">Edit Task</string>
 </resources>

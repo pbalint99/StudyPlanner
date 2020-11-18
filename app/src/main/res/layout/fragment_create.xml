@@ -12,10 +12,6 @@
         android:id="@+id/etSubject"
         android:width="200dp"
         android:hint="Subject" />
-    <TextView
-        android:id="@+id/etType"
-        android:width="200dp"
-        android:text="Type" />
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"

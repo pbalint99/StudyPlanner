@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import hu.bme.aut.android.studyplanner.R;
+import hu.bme.aut.android.studyplanner.repository.Repository;
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel;
 
 public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
@@ -32,6 +33,7 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
         mAdapter.deleteRow(position);
+        //taskViewModel.delete();
     }
 
 
