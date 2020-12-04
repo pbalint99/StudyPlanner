@@ -2,21 +2,24 @@ package hu.bme.aut.android.studyplanner
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
 import androidx.core.widget.NestedScrollView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import hu.bme.aut.android.studyplanner.adapter.SimpleItemRecyclerViewAdapter
-import hu.bme.aut.android.studyplanner.adapter.SwipeToDeleteCallback
+
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.task_list.*
-
 
 /**
  * An activity representing a list of Pings. This activity
@@ -77,9 +80,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         simpleItemRecyclerViewAdapter = SimpleItemRecyclerViewAdapter()
         simpleItemRecyclerViewAdapter.itemClickListener = this
         task_list.adapter = simpleItemRecyclerViewAdapter
-        //Swipe
-        val itemTouchHelper = ItemTouchHelper(SwipeToDeleteCallback(simpleItemRecyclerViewAdapter))
-        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun onItemClick(task: Task) {

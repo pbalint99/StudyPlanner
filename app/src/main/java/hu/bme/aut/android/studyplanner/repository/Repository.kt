@@ -26,10 +26,6 @@ class Repository(private val taskDao: TaskDao) {
         val roomTask = taskDao.getTaskById(task.id) ?: return@withContext
         taskDao.deleteTask(roomTask)
     }
-//    suspend fun deleteAt(index: Int) = withContext(Dispatchers.IO) {
-//        val roomTask = taskDao.getTaskById(task.id) ?: return@withContext
-//        taskDao.deleteTask(roomTask)
-//    }
 
     private fun RoomTask.toDomainModel(): Task {
         return Task(

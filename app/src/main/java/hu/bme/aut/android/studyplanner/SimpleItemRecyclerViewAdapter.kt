@@ -1,4 +1,4 @@
-package hu.bme.aut.android.studyplanner.adapter
+package hu.bme.aut.android.studyplanner
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import hu.bme.aut.android.studyplanner.R
 import hu.bme.aut.android.studyplanner.model.Task
 
 class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
