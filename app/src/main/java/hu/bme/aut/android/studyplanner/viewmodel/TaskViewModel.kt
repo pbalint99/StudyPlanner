@@ -2,7 +2,6 @@ package hu.bme.aut.android.studyplanner.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import hu.bme.aut.android.studyplanner.TaskApplication
 import hu.bme.aut.android.studyplanner.model.Task
@@ -24,10 +23,6 @@ class TaskViewModel : ViewModel() {
     fun insert(task: Task) = viewModelScope.launch {
         repository.insert(task)
     }
-
-//    fun edit(task: Task) = viewModelScope.launch {
-//        repository.
-//    }
 
     fun delete(task: Task) = viewModelScope.launch {
         repository.delete(task)
