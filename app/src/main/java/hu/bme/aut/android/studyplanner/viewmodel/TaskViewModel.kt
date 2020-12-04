@@ -32,4 +32,12 @@ class TaskViewModel : ViewModel() {
     fun delete(task: Task) = viewModelScope.launch {
         repository.delete(task)
     }
+
+    fun deleteAt(position: Int)=viewModelScope.launch {
+        val tasks=allTasks.value
+        if(tasks!=null) {
+            val task = tasks[position]
+            repository.delete(task)
+        }
+    }
 }

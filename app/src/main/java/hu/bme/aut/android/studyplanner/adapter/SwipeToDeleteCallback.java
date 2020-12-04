@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.core.content.ContextCompat;
@@ -32,9 +33,10 @@ public class SwipeToDeleteCallback extends ItemTouchHelper.SimpleCallback {
     @Override
     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
         int position = viewHolder.getAdapterPosition();
+        Log.i("pos",String.valueOf(position));
         mAdapter.deleteRow(position);
-        //taskViewModel.delete();
+        taskViewModel = ViewModelProvider(this).get(TaskViewModel::class.java)
+        taskViewModel.deleteAt(position);
     }
-
 
 }
