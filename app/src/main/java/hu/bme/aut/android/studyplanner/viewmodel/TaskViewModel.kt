@@ -7,6 +7,7 @@ import hu.bme.aut.android.studyplanner.TaskApplication
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.repository.Repository
 import kotlinx.coroutines.launch
+import java.text.FieldPosition
 
 class TaskViewModel : ViewModel() {
 
@@ -26,5 +27,12 @@ class TaskViewModel : ViewModel() {
 
     fun delete(task: Task) = viewModelScope.launch {
         repository.delete(task)
+    }
+
+    fun deleteAt(position: Int) = viewModelScope.launch {
+        val tasks=allTasks.value
+        if(tasks!=null) {
+            repository.delete(tasks[position])
+        }
     }
 }

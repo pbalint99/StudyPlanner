@@ -29,6 +29,7 @@ import kotlinx.android.synthetic.main.task_list.*
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
+
 class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener {
 
     /**
@@ -90,7 +91,9 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onItemLongClick(position: Int, view: View): Boolean {
-        TODO("Not yet implemented")
+        simpleItemRecyclerViewAdapter.deleteRow(position)
+        taskViewModel.deleteAt(position)
+        return false
     }
 
 
