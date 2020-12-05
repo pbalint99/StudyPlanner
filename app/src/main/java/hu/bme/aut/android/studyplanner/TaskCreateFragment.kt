@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.studyplanner.model.Task
 import kotlinx.android.synthetic.main.fragment_create.*
@@ -15,7 +16,6 @@ import kotlinx.android.synthetic.main.fragment_create.*
 
 class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
     private lateinit var listener: TaskCreatedListener
-    private var spinnerValue: Int = 0
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,6 +54,7 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
 
         npWeek.maxValue = 15;
         npWeek.minValue = 1;
+
         btnCreate.setOnClickListener{
             var type: Int = if(radioGroup.checkedRadioButtonId == radioHW.id) 0
             else 1
@@ -64,7 +65,7 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
                     week = npWeek.value,
                     type = type,
                     subject = etSubject.text.toString(),
-                    day = spinnerValue
+                    day = spinner.selectedItemPosition
                 )
             )
 
@@ -73,7 +74,7 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-        spinnerValue = position
+
     }
 
     override fun onNothingSelected(arg0: AdapterView<*>) {
