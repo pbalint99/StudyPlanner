@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.studyplanner.model.Task
 import kotlinx.android.synthetic.main.fragment_create.*
@@ -68,6 +69,8 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
                     day = spinner.selectedItemPosition
                 )
             )
+
+
 
             dismiss()
         }

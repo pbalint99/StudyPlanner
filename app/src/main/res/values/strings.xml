@@ -10,6 +10,8 @@
     <string name="remind_me_before">Remind me before</string>
     <string name="createFrag">Create</string>
     <string name="pick_time">Pick a time</string>
+    <string name="channel_name">Task channel</string>
+    <string name="channel_desc">Reminds of university obligations</string>
     <string-array name="Days">
         <item>Monday</item>
         <item>Tuesday</item>
