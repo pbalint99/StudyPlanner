@@ -4,4 +4,17 @@
     <string name="title_task_detail">Task Detail</string>
     <string name="create">Create new task</string>
     <string name="createBtn">Create</string>
+    <string name="subjects">Subjects</string>
+    <string name="tasks">Tasks</string>
+    <string name="add">Add</string>
+    <string name="remind_me_before">Remind me before</string>
+    <string name="createFrag">Create</string>
+    <string name="pick_time">Pick a time</string>
+    <string-array name="Days">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
 </resources>

@@ -51,4 +51,5 @@ dependencies {
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation 'com.google.android.material:material:1.2.1'
+    implementation "androidx.constraintlayout:constraintlayout:2.0.4"
 }

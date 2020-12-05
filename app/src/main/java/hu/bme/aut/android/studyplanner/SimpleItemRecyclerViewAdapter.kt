@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import hu.bme.aut.android.studyplanner.model.Task
 
+
 class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         //TODO
@@ -52,9 +53,17 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
 
             holder.task = task
 
+            val dayShort = when (task.day) {
+                0 -> "M"
+                1 -> "Tu"
+                2 -> "W"
+                3 -> "Th"
+                4 -> "F"
+                else -> ""
+            }
+
             holder.titleView.text = task.title
-            holder.weekView.text = task.week.toString()
-            holder.typeView.text = getType(task.type)
+            holder.weekView.text = task.week.toString()+"."+dayShort
             holder.subjectView.text = task.subject
             holder.typeImage.setImageResource(getTypeImage(task.type))
         }
@@ -64,7 +73,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val titleView: TextView = view.findViewById(R.id.listTitle)
             val weekView: TextView = view.findViewById(R.id.listWeek)
-            val typeView: TextView = view.findViewById(R.id.listType)
             val typeImage: ImageView = view.findViewById(R.id.iv)
             val subjectView: TextView = view.findViewById(R.id.listSubject)
             var task: Task? = null

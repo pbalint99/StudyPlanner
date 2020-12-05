@@ -2,6 +2,8 @@ package hu.bme.aut.android.studyplanner
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Debug
+import android.util.Log
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
@@ -68,6 +71,26 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         taskViewModel.allTasks.observe(this, Observer { tasks ->
             simpleItemRecyclerViewAdapter.addAll(tasks)
         })
+
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigationView.setOnNavigationItemReselectedListener { item ->
+            when(item.itemId) {
+                R.id.page_1 -> {
+                    // Respond to navigation item 1 click
+                    true
+                }
+                R.id.page_2 -> {
+                    // Respond to navigation item 2 click
+                    true
+                }
+                R.id.add_tab -> {
+                    val taskCreateFragment = TaskCreateFragment()
+                    taskCreateFragment.show(supportFragmentManager, "CreateFragment")
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     override fun onTaskCreated(task: Task) {
