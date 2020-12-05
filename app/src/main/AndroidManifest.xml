@@ -27,7 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hu.bme.aut.android.studyplanner.TaskListActivity" />
         </activity>
-    <activity android:name=".SplashScreenActivity"
+        <activity android:name=".SplashScreenActivity"
         android:theme="@style/SplashScreenTheme">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
