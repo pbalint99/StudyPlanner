@@ -3,6 +3,7 @@ package hu.bme.aut.android.studyplanner
 import android.content.Intent
 import android.os.Bundle
 import android.os.Debug
+import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import android.view.*
 import androidx.core.widget.NestedScrollView
@@ -17,8 +18,10 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import hu.bme.aut.android.studyplanner.model.Subject
 
 import hu.bme.aut.android.studyplanner.model.Task
+import hu.bme.aut.android.studyplanner.viewmodel.SubjectViewModel
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.task_list.*
 
@@ -31,7 +34,7 @@ import kotlinx.android.synthetic.main.task_list.*
  * item details side-by-side using two vertical panes.
  */
 
-class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener {
+class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.TaskItemClickListener, TaskCreateFragment.TaskCreatedListener, SubjectCreateFragment.SubjectCreatedListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -40,6 +43,7 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     private var twoPane: Boolean = false
 
     private lateinit var taskViewModel: TaskViewModel
+    private lateinit var subjectViewModel: SubjectViewModel
     private lateinit var simpleItemRecyclerViewAdapter: SimpleItemRecyclerViewAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,6 +73,8 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         taskViewModel.allTasks.observe(this, Observer { tasks ->
             simpleItemRecyclerViewAdapter.addAll(tasks)
         })
+
+        subjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
 
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
         bottomNavigationView.setOnNavigationItemReselectedListener { item ->
@@ -133,12 +139,17 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
             return true
         }
         if (id == R.id.createSubject) {
-            Toast.makeText(this, "Item Two Clicked", Toast.LENGTH_LONG).show()
+            val subjectCreateFragment = SubjectCreateFragment()
+            subjectCreateFragment.show(supportFragmentManager, "CreateFragment")
             return true
         }
 
         return super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onSubjectCreated(subject: Subject) {
+        subjectViewModel.insert(subject)
     }
 
 

@@ -1,4 +1,4 @@
-package hu.bme.aut.android.studyplanner
+package hu.bme.aut.android.studyplanner.application
 
 import android.app.Application
 import android.app.NotificationChannel
@@ -8,12 +8,16 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.room.Room
+import hu.bme.aut.android.studyplanner.R
+import hu.bme.aut.android.studyplanner.database.SubjectDatabase
 import hu.bme.aut.android.studyplanner.database.TaskDatabase
 
 class TaskApplication : Application() {
 
     companion object {
         lateinit var taskDatabase: TaskDatabase
+            private set
+        lateinit var subjectDatabase: SubjectDatabase
             private set
     }
 
@@ -24,6 +28,12 @@ class TaskApplication : Application() {
             applicationContext,
             TaskDatabase::class.java,
             "task_database"
+        ).build()
+
+        subjectDatabase = Room.databaseBuilder(
+            applicationContext,
+            SubjectDatabase::class.java,
+            "subject_database"
         ).build()
 
         createNotificationChannel()

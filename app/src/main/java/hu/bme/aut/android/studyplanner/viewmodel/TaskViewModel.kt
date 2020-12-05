@@ -3,11 +3,10 @@ package hu.bme.aut.android.studyplanner.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import hu.bme.aut.android.studyplanner.TaskApplication
+import hu.bme.aut.android.studyplanner.application.TaskApplication
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.repository.Repository
 import kotlinx.coroutines.launch
-import java.text.FieldPosition
 
 class TaskViewModel : ViewModel() {
 

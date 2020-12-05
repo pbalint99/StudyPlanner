@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_books"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name=".TaskApplication">
+        android:name=".application.TaskApplication">
         <activity
             android:name=".TaskListActivity"
             android:label="@string/title_task_list"
