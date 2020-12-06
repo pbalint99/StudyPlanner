@@ -150,6 +150,38 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
             })
             return true
         }
+        if (id == R.id.average) {
+            var percent=0.0
+            var gradesList= mutableListOf<Int>()
+            var grade = 0
+            taskViewModel.allTasks.observe(this, Observer { tasks ->
+                subjectViewModel.allSubjects.observe(this,{subjects ->
+                    for (i in subjects.indices) {
+                        for (j in tasks.indices) {
+                            if (tasks[j].subject == subjects[i].title) {
+                                percent += tasks[j].percent
+                            }
+                        }
+                        grade = when {
+                            percent >= 85 -> 5
+                            percent >= 70 -> 4
+                            percent >= 55 -> 3
+                            percent >= 40  -> 2
+                            else -> 1
+                        }
+                        gradesList.add(i,grade)
+                        percent = 0.0
+                    }
+                    Toast.makeText(applicationContext,"Average: "+(gradesList.sum()/gradesList.size).toString(),Toast.LENGTH_LONG).show()
+                })
+            })
+
+            return true
+        }
+        if (id == R.id.theme) {
+
+            return true
+        }
         return super.onOptionsItemSelected(item)
 
     }

@@ -85,6 +85,7 @@ class TaskDetailFragment : Fragment() {
                 selectedTask!!.week.toString()
             }
             task_day.hint = day
+            et_percent.hint = selectedTask!!.percent.toInt().toString()
 
             save_button.setOnClickListener {
                 if (task_week.text.toString() != "" || task_day.text.toString() != "") {
@@ -139,7 +140,34 @@ class TaskDetailFragment : Fragment() {
                 }
             }
 
-
+            val subject = selectedTask!!.subject
+            var percent = 0.0
+            for(i in tasks.indices) {
+                if (tasks[i].subject == subject) {
+                    percent += tasks[i].percent
+                }
+            }
+            val grade = when {
+            percent >= 85 -> 5
+            percent >= 70 -> 4
+            percent >= 55 -> 3
+            percent >= 40  -> 2
+                else -> 1
+            }
+            soFar.text = "So far "+percent.toInt()+" percent ("+grade+")"
+            savePercent.setOnClickListener{
+                taskViewModel.deleteAt(pos)
+                val newTask = Task(
+                    week = selectedTask!!.week,
+                    type = selectedTask!!.type,
+                    subject = selectedTask!!.subject,
+                    day = selectedTask!!.day,
+                    date = selectedTask!!.date,
+                    percent = et_percent.text.toString().toDouble()
+                )
+                taskViewModel.insert(newTask)
+                activity?.finish()
+            }
 
         })
     }
