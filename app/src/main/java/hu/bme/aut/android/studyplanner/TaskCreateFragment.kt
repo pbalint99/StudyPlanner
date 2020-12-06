@@ -9,9 +9,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModelProvider
+import hu.bme.aut.android.studyplanner.application.TaskApplication
+import hu.bme.aut.android.studyplanner.model.Subject
 import hu.bme.aut.android.studyplanner.model.Task
+import hu.bme.aut.android.studyplanner.repository.RepositoryS
+import hu.bme.aut.android.studyplanner.viewmodel.SubjectViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 
 
@@ -30,6 +35,8 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
         } catch (e: ClassCastException) {
             throw RuntimeException(e)
         }
+
+
     }
 
     override fun onCreateView(
@@ -43,9 +50,34 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
         val spinner = view.findViewById<Spinner>(R.id.spinner)
         val days = resources.getStringArray(R.array.Days)
         spinner.onItemSelectedListener = this
-        val arrayAdapter = ArrayAdapter(activity!!.applicationContext, android.R.layout.simple_spinner_item, days)
+        val arrayAdapter = ArrayAdapter(
+            activity!!.applicationContext,
+            android.R.layout.simple_spinner_item,
+            days
+        )
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = arrayAdapter
+
+        //Getting subjects for subject spinner
+        var arrayAdapterS: ArrayAdapter<String>
+        val spinnerS = view.findViewById<Spinner>(R.id.subjectSpinner)
+        spinnerS.onItemSelectedListener = this
+        val subjectNames : MutableList<String> = mutableListOf()
+        val subjectViewModel : SubjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
+        subjectViewModel.allSubjects.observe(this, { subjects ->
+            for (element in subjects) {
+                subjectNames.add(element.title)
+            }
+            arrayAdapterS = ArrayAdapter(
+                activity!!.applicationContext,
+                android.R.layout.simple_spinner_item,
+                subjectNames
+            )
+            arrayAdapterS.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerS.adapter = arrayAdapterS
+        })
+
+//        arrayAdapterS.notifyDataSetChanged()
 
         return view
     }
@@ -57,19 +89,20 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
         npWeek.minValue = 1;
 
         btnCreate.setOnClickListener{
-            var type: Int = if(radioGroup.checkedRadioButtonId == radioHW.id) 0
+            val type: Int = if(radioGroup.checkedRadioButtonId == radioHW.id) 0
             else 1
+
+            val subject = if(subjectSpinner.selectedItem != null) subjectSpinner.selectedItem.toString()
+            else "Error"
 
             listener.onTaskCreated(
                 Task(
-                    title = etTitle.text.toString(),
                     week = npWeek.value,
                     type = type,
-                    subject = etSubject.text.toString(),
+                    subject = subject,
                     day = spinner.selectedItemPosition
                 )
             )
-
 
 
             dismiss()
@@ -77,11 +110,12 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
     }
 
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
-
+//        if(id.toInt()==R.id.spinner) {
+//            Toast.makeText(context,"Works",Toast.LENGTH_LONG).show()
+//        }
     }
 
     override fun onNothingSelected(arg0: AdapterView<*>) {
-
     }
 
     interface TaskCreatedListener {

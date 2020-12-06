@@ -2,12 +2,14 @@ package hu.bme.aut.android.studyplanner
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import hu.bme.aut.android.studyplanner.model.Subject
 import hu.bme.aut.android.studyplanner.model.Task
@@ -39,6 +41,7 @@ class SubjectCreateFragment: DialogFragment() {
         val view = inflater.inflate(R.layout.fragment_create_subject, container, false)
         dialog?.setTitle(getString(R.string.create_subject_fragment_title))
 
+
         return view
     }
 
@@ -46,7 +49,6 @@ class SubjectCreateFragment: DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         btnCreateSubject.setOnClickListener{
-
             listener.onSubjectCreated(
                 Subject(
                     title = subjectName.text.toString()

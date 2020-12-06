@@ -8,14 +8,11 @@
     android:layout_height="wrap_content"
     android:stretchColumns="1">
 
-    <EditText
-        android:id="@+id/etTitle"
-        android:width="200dp"
-        android:hint="Name" />
-    <EditText
-        android:id="@+id/etSubject"
-        android:width="200dp"
-        android:hint="Subject" />
+    <Spinner
+        android:id="@+id/subjectSpinner"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:visibility="visible" />
     <TextView
         android:id="@+id/etType"
         android:width="200dp"
@@ -38,10 +35,9 @@
         android:id="@+id/npWeek"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
-
     <Spinner
         android:id="@+id/spinner"
-        android:layout_width="149dp"
+        android:layout_width="200dp"
         android:layout_height="40dp" />
     <Button
         android:id="@+id/btnCreate"
