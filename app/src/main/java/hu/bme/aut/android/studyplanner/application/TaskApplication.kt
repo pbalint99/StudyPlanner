@@ -1,5 +1,6 @@
 package hu.bme.aut.android.studyplanner.application
 
+import android.app.Activity
 import android.app.Application
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -11,6 +12,7 @@ import androidx.room.Room
 import hu.bme.aut.android.studyplanner.R
 import hu.bme.aut.android.studyplanner.database.SubjectDatabase
 import hu.bme.aut.android.studyplanner.database.TaskDatabase
+import java.util.*
 
 class TaskApplication : Application() {
 
@@ -20,6 +22,9 @@ class TaskApplication : Application() {
         lateinit var subjectDatabase: SubjectDatabase
             private set
     }
+
+    private val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
+    private var mNotified = false
 
     override fun onCreate() {
         super.onCreate()
@@ -36,35 +41,8 @@ class TaskApplication : Application() {
             "subject_database"
         ).build()
 
-        createNotificationChannel()
-
-        //TODO: remove
-        with(NotificationManagerCompat.from(this)) {
-            // notificationId is a unique int for each notification that you must define
-            notify(1, builder.build())
-        }
-    }
-
-    var builder = NotificationCompat.Builder(this, "Task")
-        .setSmallIcon(R.drawable.close)
-        .setContentTitle("Task coming up")
-        .setContentText("Don't forget!")
-        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = getString(R.string.channel_name)
-            val descriptionText = getString(R.string.channel_desc)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel("Task", name, importance).apply {
-                description = descriptionText
-            }
-            // Register the channel with the system
-            val notificationManager: NotificationManager =
-                getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            notificationManager.createNotificationChannel(channel)
+        if (!mNotified) {
+            NotificationUtils().setNotification(mNotificationTime,this)
         }
     }
 
