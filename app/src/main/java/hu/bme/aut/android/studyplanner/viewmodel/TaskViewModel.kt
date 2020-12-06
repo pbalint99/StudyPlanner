@@ -34,4 +34,8 @@ class TaskViewModel : ViewModel() {
             repository.delete(tasks[position])
         }
     }
+
+    fun deleteAll()= viewModelScope.launch {
+        repository.deleteAll()
+    }
 }

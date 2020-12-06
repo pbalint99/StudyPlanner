@@ -3,6 +3,7 @@ package hu.bme.aut.android.studyplanner
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +22,7 @@ import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.viewmodel.SubjectViewModel
 import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
 import kotlinx.android.synthetic.main.task_list.*
+import java.util.*
 
 /**
  * An activity representing a list of Pings. This activity
@@ -51,11 +53,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         setSupportActionBar(toolbar)
         toolbar.title = title
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            val taskCreateFragment = TaskCreateFragment()
-            taskCreateFragment.show(supportFragmentManager, "TAG")
-        }
-
         if (findViewById<NestedScrollView>(R.id.task_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-w900dp).
@@ -84,11 +81,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
                     // Respond to navigation item 2 click
                     true
                 }
-                R.id.add_tab -> {
-                    val taskCreateFragment = TaskCreateFragment()
-                    taskCreateFragment.show(supportFragmentManager, "CreateFragment")
-                    true
-                }
                 else -> false
             }
         }
@@ -96,7 +88,10 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
 
     override fun onTaskCreated(task: Task) {
         taskViewModel.insert(task)
-        NotificationUtils().setNotification(task.date-86400000,this)
+        if(task.date>Calendar.DATE) {
+            NotificationUtils().setNotification(task.date - 86400000, this)
+        }
+        simpleItemRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
@@ -109,9 +104,15 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
     }
 
     override fun onItemClick(task: Task) {
+        var pos: Int = 0
         val intent = Intent(this, TaskDetailActivity::class.java).apply {
-            //putExtra(EXTRA_MESSAGE, message)
+            for (i in taskViewModel.allTasks.value!!.indices) {
+                if(taskViewModel.allTasks.value!![i].id == task.id) {
+                    pos = i
+                }
+            }
         }
+        intent.putExtra(TaskDetailFragment.ARG_ITEM_ID, pos)
         startActivity(intent)
     }
 
@@ -146,7 +147,10 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
             scheduleFragment.show(supportFragmentManager, "CreateFragment")
             return true
         }
-
+        if (id == R.id.deleteAll) {
+            taskViewModel.deleteAll()
+            return true
+        }
         return super.onOptionsItemSelected(item)
 
     }

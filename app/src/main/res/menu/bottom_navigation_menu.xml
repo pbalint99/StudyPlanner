@@ -6,12 +6,6 @@
         android:icon="@drawable/close"
         android:title="@string/tasks"/>
     <item
-        android:id="@+id/add_tab"
-        android:enabled="true"
-        android:icon="@drawable/close"
-        android:title="@string/add"/>
-
-    <item
         android:id="@+id/page_2"
         android:enabled="true"
         android:icon="@drawable/close"

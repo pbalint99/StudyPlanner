@@ -9,6 +9,9 @@
         android:id="@+id/createSubject"
         android:title="@string/create_subject_option"/>
     <item
+        android:id="@+id/deleteAll"
+        android:title="@string/delete_all"/>
+    <item
         android:id="@+id/setSchedule"
         android:title="@string/set_schedule"/>
 </menu>

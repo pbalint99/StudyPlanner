@@ -8,7 +8,7 @@ interface TaskDao {
     @Insert
     fun insertTask(task: RoomTask)
 
-    @Query("SELECT * FROM task ORDER BY week")
+    @Query("SELECT * FROM task ORDER BY week, day")
     fun getAllTasks(): LiveData<List<RoomTask>>
 
     @Query("SELECT * FROM task WHERE id == :id")
@@ -19,4 +19,7 @@ interface TaskDao {
 
     @Delete
     fun deleteTask(task: RoomTask)
+
+    @Query("DELETE FROM task")
+    fun deleteAllTasks()
 }

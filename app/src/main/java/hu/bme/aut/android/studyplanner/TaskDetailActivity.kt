@@ -6,6 +6,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import hu.bme.aut.android.studyplanner.fragment.TaskCreateFragment
 
 /**
  * An activity representing a single Task detail screen. This
@@ -14,6 +15,9 @@ import android.view.MenuItem
  * in a [TaskListActivity].
  */
 class TaskDetailActivity : AppCompatActivity() {
+    companion object {
+        const val TASK_ID = "TASK_ID"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +25,9 @@ class TaskDetailActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            val taskCreateFragment = TaskCreateFragment()
+
+            taskCreateFragment.show(supportFragmentManager, "CreateFragment")
         }
 
         // Show the Up button in the action bar.

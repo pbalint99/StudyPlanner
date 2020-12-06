@@ -27,6 +27,10 @@ class Repository(private val taskDao: TaskDao) {
         taskDao.deleteTask(roomTask)
     }
 
+    suspend fun deleteAll() = withContext(Dispatchers.IO) {
+        taskDao.deleteAllTasks()
+    }
+
     private fun RoomTask.toDomainModel(): Task {
         return Task(
             id = id,

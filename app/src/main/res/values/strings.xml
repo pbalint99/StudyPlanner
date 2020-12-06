@@ -19,6 +19,7 @@
     <string name="create_subject_option">Create subject</string>
     <string name="set_schedule">Set schedule</string>
     <string name="schedule_title">Choose first day of university</string>
+    <string name="delete_all">Delete all</string>
     <string-array name="Days">
         <item>Monday</item>
         <item>Tuesday</item>
