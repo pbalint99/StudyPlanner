@@ -73,7 +73,8 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
 
     override fun onTaskCreated(task: Task) {
         taskViewModel.insert(task)
-        if(task.date>Calendar.DATE) {
+        val newCalendar = Calendar.getInstance()
+        if(task.date>newCalendar.timeInMillis) {
             NotificationUtils().setNotification(task.date - 86400000, this)
         }
         simpleItemRecyclerViewAdapter.notifyDataSetChanged()
