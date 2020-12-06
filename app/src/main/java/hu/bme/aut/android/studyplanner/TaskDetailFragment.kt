@@ -1,5 +1,6 @@
 package hu.bme.aut.android.studyplanner
 
+import android.app.Activity
 import android.content.Intent
 import android.content.Intent.getIntent
 import android.os.Bundle
@@ -48,12 +49,6 @@ class TaskDetailFragment : Fragment() {
      */
     private var selectedTask: Task? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-    }
-
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
@@ -86,9 +81,64 @@ class TaskDetailFragment : Fragment() {
                 4 -> "Friday"
                 else -> ""
             }
-            task_date.text= selectedTask?.date?.let {
-                selectedTask!!.week.toString()+". Week "+day
+            task_week.hint= selectedTask?.date?.let {
+                selectedTask!!.week.toString()
             }
+            task_day.hint = day
+
+            save_button.setOnClickListener {
+                if (task_week.text.toString() != "" || task_day.text.toString() != "") {
+                    val week = if(task_week.text.toString() != "") task_week.text.toString().toInt()
+                    else -1
+                    val day = when (task_day.text.toString()) {
+                        "Monday" -> 0
+                        "Tuesday" -> 1
+                        "Wednesday" -> 2
+                        "Thursday" -> 3
+                        "Friday" -> 4
+                        else -> -1
+                    }
+                    if (week % 1 == 0 && week > 0 && week < 16) {
+                        taskViewModel.deleteAt(pos)
+                        val newTask: Task
+                        if (day != -1) {
+                            newTask = Task(
+                                week = week,
+                                type = selectedTask!!.type,
+                                subject = selectedTask!!.subject,
+                                day = day,
+                                date = selectedTask!!.date
+                            )
+                        } else {
+                            newTask = Task(
+                                week = week,
+                                type = selectedTask!!.type,
+                                subject = selectedTask!!.subject,
+                                day = selectedTask!!.day,
+                                date = selectedTask!!.date
+                            )
+                        }
+                        taskViewModel.insert(newTask)
+                        activity?.finish()
+                    } else if (day != -1) {
+                        taskViewModel.deleteAt(pos)
+                        val newTask = Task(
+                            week = selectedTask!!.week,
+                            type = selectedTask!!.type,
+                            subject = selectedTask!!.subject,
+                            day = day,
+                            date = selectedTask!!.date
+                        )
+                        taskViewModel.insert(newTask)
+                        activity?.finish()
+                    } else {
+                        Toast.makeText(context, "Impossible date", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(context, "Nothing changed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
         })
     }
 

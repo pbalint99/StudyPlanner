@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical">
-<TextView
-    android:id="@+id/task_detail"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".TaskDetailFragment" />
-<TextView
-    android:id="@+id/task_date"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".TaskDetailFragment" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/task_detail"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textIsSelectable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".TaskDetailFragment" />
+
+    <EditText
+        android:id="@+id/task_week"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="75dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:padding="16dp"
+        android:textIsSelectable="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_detail"
+        tools:context=".TaskDetailFragment" />
+
+    <EditText
+        android:id="@+id/task_day"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/task_week"
+        app:layout_constraintStart_toEndOf="@+id/tv_week"
+        app:layout_constraintTop_toTopOf="@+id/task_week" />
+
+    <TextView
+        android:id="@+id/tv_week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="week"
+        android:textSize="24sp"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/task_week"
+        app:layout_constraintStart_toEndOf="@+id/task_week"
+        app:layout_constraintTop_toBottomOf="@+id/task_detail" />
+
+    <Button
+        android:id="@+id/save_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save date"
+        app:layout_constraintBottom_toBottomOf="@+id/task_day"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/task_day" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,9 +25,7 @@ class TaskDetailActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            val taskCreateFragment = TaskCreateFragment()
-
-            taskCreateFragment.show(supportFragmentManager, "CreateFragment")
+            //TODO: remove
         }
 
         // Show the Up button in the action bar.
