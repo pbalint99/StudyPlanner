@@ -4,12 +4,13 @@ import android.app.Activity
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Intent
+import hu.bme.aut.android.studyplanner.TaskListActivity
 import java.util.*
 
 class NotificationUtils {
 
 
-    fun setNotification(timeInMilliSeconds: Long, activity: TaskApplication) {
+    fun setNotification(timeInMilliSeconds: Long, activity: TaskListActivity) {
 
         //------------  alarm settings start  -----------------//
 

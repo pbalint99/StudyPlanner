@@ -34,7 +34,8 @@ class Repository(private val taskDao: TaskDao) {
             week = week,
             type = type,
             subject = subject,
-            day = day
+            day = day,
+            date = date
         )
     }
 
@@ -44,7 +45,8 @@ class Repository(private val taskDao: TaskDao) {
             week = week,
             type = type,
             subject = subject,
-            day = day
+            day = day,
+            date = date
         )
     }
 }

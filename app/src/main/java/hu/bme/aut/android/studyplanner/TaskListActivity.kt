@@ -11,6 +11,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import hu.bme.aut.android.studyplanner.application.NotificationUtils
 import hu.bme.aut.android.studyplanner.fragment.ScheduleFragment
 import hu.bme.aut.android.studyplanner.fragment.SubjectCreateFragment
 import hu.bme.aut.android.studyplanner.fragment.TaskCreateFragment
@@ -95,6 +96,7 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
 
     override fun onTaskCreated(task: Task) {
         taskViewModel.insert(task)
+        NotificationUtils().setNotification(task.date-86400000,this)
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {

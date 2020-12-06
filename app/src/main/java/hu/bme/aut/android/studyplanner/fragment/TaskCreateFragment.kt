@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import hu.bme.aut.android.studyplanner.R
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.viewmodel.SubjectViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
+import java.util.*
 
 
 class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
@@ -91,12 +93,22 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
             val subject = if(subjectSpinner.selectedItem != null) subjectSpinner.selectedItem.toString()
             else "Error"
 
+            val week = npWeek.value
+            val day = spinner.selectedItemPosition
+
+            val pref = context?.getSharedPreferences("MyPref", 0) // 0 - for private mode
+            val firstDay = pref?.getLong("firstDay",0)
+            val date = firstDay!! +(week-1)*604800000+day*86400000
+            val dateString= Date(date).toString()
+            Toast.makeText(context,dateString,Toast.LENGTH_LONG).show()
+
             listener.onTaskCreated(
                 Task(
-                    week = npWeek.value,
+                    week = week,
                     type = type,
                     subject = subject,
-                    day = spinner.selectedItemPosition
+                    day = day,
+                    date = date
                 )
             )
 

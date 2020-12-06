@@ -1,9 +1,11 @@
 package hu.bme.aut.android.studyplanner.application
 
 import android.app.Application
+import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import hu.bme.aut.android.studyplanner.database.SubjectDatabase
 import hu.bme.aut.android.studyplanner.database.TaskDatabase
+import hu.bme.aut.android.studyplanner.viewmodel.TaskViewModel
 
 
 class TaskApplication : Application() {
@@ -17,6 +19,7 @@ class TaskApplication : Application() {
 
 //    private val mNotificationTime = Calendar.getInstance().timeInMillis + 5000 //Set after 5 seconds from the current time.
 //    private var mNotified = false
+    private lateinit var taskViewModel: TaskViewModel
 
     override fun onCreate() {
         super.onCreate()
@@ -36,8 +39,6 @@ class TaskApplication : Application() {
 //        if (!mNotified) {
 //            NotificationUtils().setNotification(mNotificationTime,this)
 //        }
-        val pref = applicationContext.getSharedPreferences("MyPref", 0) // 0 - for private mode
-        pref.getInt("firstDay",0)
     }
 
 }

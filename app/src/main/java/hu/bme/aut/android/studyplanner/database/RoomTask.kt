@@ -12,5 +12,5 @@ data class RoomTask(
     val subject: String = "",
     val week: Int = 1,
     val day: Int = 1,
-    val date: Int = 1
+    val date: Long = 1
 )
