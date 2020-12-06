@@ -62,7 +62,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
                 else -> ""
             }
 
-            holder.titleView.text = task.title
             holder.weekView.text = task.week.toString()+"."+dayShort
             holder.subjectView.text = task.subject
             holder.typeImage.setImageResource(getTypeImage(task.type))
@@ -71,7 +70,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
         override fun getItemCount() = taskList.size
 
         inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val titleView: TextView = view.findViewById(R.id.listTitle)
             val weekView: TextView = view.findViewById(R.id.listWeek)
             val typeImage: ImageView = view.findViewById(R.id.iv)
             val subjectView: TextView = view.findViewById(R.id.listSubject)

@@ -24,10 +24,6 @@ class TaskDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_task_detail)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
-        findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
-            //TODO: remove
-        }
-
         // Show the Up button in the action bar.
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 

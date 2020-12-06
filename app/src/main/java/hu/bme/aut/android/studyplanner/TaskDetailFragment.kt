@@ -154,7 +154,7 @@ class TaskDetailFragment : Fragment() {
             percent >= 40  -> 2
                 else -> 1
             }
-            soFar.text = "So far "+percent.toInt()+" percent ("+grade+")"
+            soFar.text = "So far "+percent.toInt()+"% ("+grade+")"
             savePercent.setOnClickListener{
                 taskViewModel.deleteAt(pos)
                 val newTask = Task(

@@ -178,10 +178,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
 
             return true
         }
-        if (id == R.id.theme) {
-
-            return true
-        }
         return super.onOptionsItemSelected(item)
 
     }
