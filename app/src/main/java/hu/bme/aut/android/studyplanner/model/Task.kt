@@ -9,7 +9,8 @@ class Task(
     val day: Int = 1,
     val type: Int = 0,
     val subject: String = "",
-    val date: Long = 1
+    val date: Long = 1,
+    val percent: Double = 0.0
 ) {
 
 }

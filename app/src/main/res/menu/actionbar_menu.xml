@@ -12,6 +12,12 @@
         android:id="@+id/deleteAll"
         android:title="@string/delete_all"/>
     <item
+        android:id="@+id/orderTime"
+        android:title="Order by time"/>
+    <item
+        android:id="@+id/orderSubject"
+        android:title="Order by subject"/>
+    <item
         android:id="@+id/setSchedule"
         android:title="@string/set_schedule"/>
 </menu>

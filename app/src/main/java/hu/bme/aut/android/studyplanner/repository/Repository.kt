@@ -17,6 +17,13 @@ class Repository(private val taskDao: TaskDao) {
                     roomTask.toDomainModel() }
             }
     }
+    fun getAllTasksBySubject(): LiveData<List<Task>> {
+        return taskDao.getAllTasksBySubject()
+            .map {roomTasks ->
+                roomTasks.map {roomTask ->
+                    roomTask.toDomainModel() }
+            }
+    }
 
     suspend fun insert(task: Task) = withContext(Dispatchers.IO) {
         taskDao.insertTask(task.toRoomModel())
@@ -39,7 +46,8 @@ class Repository(private val taskDao: TaskDao) {
             type = type,
             subject = subject,
             day = day,
-            date = date
+            date = date,
+            percent = percent
         )
     }
 
@@ -50,7 +58,8 @@ class Repository(private val taskDao: TaskDao) {
             type = type,
             subject = subject,
             day = day,
-            date = date
+            date = date,
+            percent = percent
         )
     }
 }

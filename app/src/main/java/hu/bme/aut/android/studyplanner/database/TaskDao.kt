@@ -11,6 +11,9 @@ interface TaskDao {
     @Query("SELECT * FROM task ORDER BY week, day")
     fun getAllTasks(): LiveData<List<RoomTask>>
 
+    @Query("SELECT * FROM task ORDER BY subject")
+    fun getAllTasksBySubject(): LiveData<List<RoomTask>>
+
     @Query("SELECT * FROM task WHERE id == :id")
     fun getTaskById(id: Long?): RoomTask?
 

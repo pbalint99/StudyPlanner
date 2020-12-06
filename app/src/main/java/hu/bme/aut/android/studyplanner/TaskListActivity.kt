@@ -69,21 +69,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         })
 
         subjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.setOnNavigationItemReselectedListener { item ->
-            when(item.itemId) {
-                R.id.page_1 -> {
-                    // Respond to navigation item 1 click
-                    true
-                }
-                R.id.page_2 -> {
-                    // Respond to navigation item 2 click
-                    true
-                }
-                else -> false
-            }
-        }
     }
 
     override fun onTaskCreated(task: Task) {
@@ -151,12 +136,26 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
             taskViewModel.deleteAll()
             return true
         }
+        if (id == R.id.orderTime) {
+            taskViewModel.orderBySubject = false
+            simpleItemRecyclerViewAdapter.notifyDataSetChanged()
+            return true
+        }
+        if (id == R.id.orderSubject) {
+            taskViewModel.getAllTasksBySubject()
+            simpleItemRecyclerViewAdapter.notifyDataSetChanged()
+            taskViewModel.allTasks.observe(this, Observer { tasks ->
+                simpleItemRecyclerViewAdapter.addAll(tasks)
+            })
+            return true
+        }
         return super.onOptionsItemSelected(item)
 
     }
 
     override fun onSubjectCreated(subject: Subject) {
         subjectViewModel.insert(subject)
+
     }
 
 

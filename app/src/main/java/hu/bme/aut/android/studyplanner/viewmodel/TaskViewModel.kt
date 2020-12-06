@@ -4,18 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import hu.bme.aut.android.studyplanner.application.TaskApplication
+import hu.bme.aut.android.studyplanner.database.TaskDao
 import hu.bme.aut.android.studyplanner.model.Task
 import hu.bme.aut.android.studyplanner.repository.Repository
 import kotlinx.coroutines.launch
 
 class TaskViewModel : ViewModel() {
 
-    private val repository: Repository
+    private var repository: Repository
 
-    val allTasks: LiveData<List<Task>>
+    var allTasks: LiveData<List<Task>>
+    var taskDao: TaskDao = TaskApplication.taskDatabase.taskDao()
+    var orderBySubject: Boolean = false
 
     init {
-        val taskDao = TaskApplication.taskDatabase.taskDao()
         repository = Repository(taskDao)
         allTasks = repository.getAllTasks()
     }
@@ -38,4 +40,9 @@ class TaskViewModel : ViewModel() {
     fun deleteAll()= viewModelScope.launch {
         repository.deleteAll()
     }
+
+    fun getAllTasksBySubject()= viewModelScope.launch {
+        allTasks=repository.getAllTasksBySubject()
+    }
+
 }
