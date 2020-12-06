@@ -4,8 +4,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/createTask"
-        android:title="Create task"/>
+        android:title="@string/create_task"/>
     <item
         android:id="@+id/createSubject"
-        android:title="Create subject"/>
+        android:title="@string/create_subject_option"/>
+    <item
+        android:id="@+id/setSchedule"
+        android:title="@string/set_schedule"/>
 </menu>

@@ -1,19 +1,13 @@
-package hu.bme.aut.android.studyplanner
+package hu.bme.aut.android.studyplanner.fragment
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import hu.bme.aut.android.studyplanner.R
 import hu.bme.aut.android.studyplanner.model.Subject
-import hu.bme.aut.android.studyplanner.model.Task
-import kotlinx.android.synthetic.main.fragment_create.*
 import kotlinx.android.synthetic.main.fragment_create_subject.*
 
 class SubjectCreateFragment: DialogFragment() {

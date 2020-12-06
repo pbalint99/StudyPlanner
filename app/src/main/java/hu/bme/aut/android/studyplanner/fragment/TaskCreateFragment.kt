@@ -1,4 +1,4 @@
-package hu.bme.aut.android.studyplanner
+package hu.bme.aut.android.studyplanner.fragment
 
 import android.content.Context
 import android.os.Bundle
@@ -8,14 +8,10 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModelProvider
-import hu.bme.aut.android.studyplanner.application.TaskApplication
-import hu.bme.aut.android.studyplanner.model.Subject
+import hu.bme.aut.android.studyplanner.R
 import hu.bme.aut.android.studyplanner.model.Task
-import hu.bme.aut.android.studyplanner.repository.RepositoryS
 import hu.bme.aut.android.studyplanner.viewmodel.SubjectViewModel
 import kotlinx.android.synthetic.main.fragment_create.*
 
@@ -45,7 +41,7 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_create, container, false)
-        dialog?.setTitle(getString(hu.bme.aut.android.studyplanner.R.string.createFrag))
+        dialog?.setTitle(getString(R.string.createFrag))
 
         val spinner = view.findViewById<Spinner>(R.id.spinner)
         val days = resources.getStringArray(R.array.Days)

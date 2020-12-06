@@ -2,22 +2,18 @@ package hu.bme.aut.android.studyplanner
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Debug
-import android.provider.SyncStateContract.Helpers.insert
-import android.util.Log
 import android.view.*
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import androidx.appcompat.widget.Toolbar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import hu.bme.aut.android.studyplanner.fragment.ScheduleFragment
+import hu.bme.aut.android.studyplanner.fragment.SubjectCreateFragment
+import hu.bme.aut.android.studyplanner.fragment.TaskCreateFragment
 import hu.bme.aut.android.studyplanner.model.Subject
 
 import hu.bme.aut.android.studyplanner.model.Task
@@ -141,6 +137,11 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         if (id == R.id.createSubject) {
             val subjectCreateFragment = SubjectCreateFragment()
             subjectCreateFragment.show(supportFragmentManager, "CreateFragment")
+            return true
+        }
+        if (id == R.id.setSchedule) {
+            val scheduleFragment = ScheduleFragment()
+            scheduleFragment.show(supportFragmentManager, "CreateFragment")
             return true
         }
 
