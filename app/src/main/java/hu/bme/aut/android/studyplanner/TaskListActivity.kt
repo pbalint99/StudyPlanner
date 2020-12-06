@@ -71,15 +71,6 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         subjectViewModel = ViewModelProvider(this).get(SubjectViewModel::class.java)
     }
 
-    override fun onTaskCreated(task: Task) {
-        taskViewModel.insert(task)
-        val newCalendar = Calendar.getInstance()
-        if(task.date>newCalendar.timeInMillis) {
-            NotificationUtils().setNotification(task.date - 86400000, this)
-        }
-        simpleItemRecyclerViewAdapter.notifyDataSetChanged()
-    }
-
     private fun setupRecyclerView(recyclerView: RecyclerView) {
 //        val demo = mutableListOf<Task>()
 //        demo.add(0,Task("UWU"))
@@ -180,6 +171,15 @@ class TaskListActivity : AppCompatActivity(),  SimpleItemRecyclerViewAdapter.Tas
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+    override fun onTaskCreated(task: Task) {
+        taskViewModel.insert(task)
+        val newCalendar = Calendar.getInstance()
+        if(task.date>newCalendar.timeInMillis) {
+            NotificationUtils().setNotification(task.date - 86400000, this)
+        }
+        simpleItemRecyclerViewAdapter.notifyDataSetChanged()
     }
 
     override fun onSubjectCreated(subject: Subject) {

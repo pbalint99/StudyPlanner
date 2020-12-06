@@ -11,7 +11,6 @@ import hu.bme.aut.android.studyplanner.model.Task
 
 class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
-        //TODO
         //private val parentActivity: TaskListActivity
         //private val values: List<Task>
         private val twoPane: Boolean = false
@@ -81,7 +80,6 @@ class SimpleItemRecyclerViewAdapter() : RecyclerView.Adapter<SimpleItemRecyclerV
                 }
 
                 itemView.setOnLongClickListener { view ->
-                    //TODO Kiszedtem egy taskot a végéről
                     task?.let {task -> itemClickListener?.onItemLongClick(adapterPosition, view) }
                     true
                 }

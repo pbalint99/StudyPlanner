@@ -12,6 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Done"
-        android:id="@+id/btnDone"/>
+        android:id="@+id/btnDone"
+        android:width="200dp"
+        android:background="@color/colorPrimary"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

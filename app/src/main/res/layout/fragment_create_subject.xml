@@ -5,14 +5,17 @@
     android:orientation="vertical">
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:textSize="24dp"
         android:id="@+id/subjectName" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnCreateSubject"
+        android:width="100dp"
+        android:background="@color/colorPrimary"
         android:text="@string/create_subject" />
 
 </LinearLayout>

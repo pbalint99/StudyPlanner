@@ -100,7 +100,6 @@ class TaskCreateFragment: DialogFragment(), AdapterView.OnItemSelectedListener {
             val firstDay = pref?.getLong("firstDay",0)
             val date = firstDay!! +(week-1)*604800000+day*86400000
             val dateString= Date(date).toString()
-            Toast.makeText(context,dateString,Toast.LENGTH_LONG).show()
 
             listener.onTaskCreated(
                 Task(
